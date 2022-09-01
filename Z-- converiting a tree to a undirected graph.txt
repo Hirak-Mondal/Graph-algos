@@ -1,0 +1,16 @@
+void create(TreeNode *root, unordered_map<int, vector<int>> &adj){
+        queue<pair<TreeNode*, TreeNode*>>q; // child, parent
+        q.push({root, nullptr});
+        while(!q.empty()){
+            auto [node, parent] =  q.front();
+            q.pop();
+            if(parent != NULL){
+                adj[node -> val].push_back(parent -> val);
+                adj[parent -> val].push_back(node -> val);
+            }
+            if(node -> left)
+                q.push({node -> left, node});
+            if(node -> right)
+                q.push({node -> right, node});
+        }
+    }
